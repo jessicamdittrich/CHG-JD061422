@@ -1,6 +1,6 @@
 class Intern {
     constructor(name, id, email, school) {
-        //need to pull name, id, email from employee file
+        // i need to pull name, id, email from employee file
         this.school = school;
     }
 

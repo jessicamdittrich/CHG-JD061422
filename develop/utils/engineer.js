@@ -1,6 +1,6 @@
 class Engineer {
     constructor(name, id, email, gitHub) {
-        //need to pull name, id, email from employee file
+        // i need to pull name, id, email from employee file
         this.gitHub = gitHub;
     }
 

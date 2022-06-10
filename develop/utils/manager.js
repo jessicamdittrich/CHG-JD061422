@@ -1,6 +1,6 @@
 class Manager {
     constructor(name, id, email, officeNumber) {
-        //need to pull name, id, email from employee file
+        // i need to pull name, id, email from employee file
         this.officeNumber = officeNumber;
     }
 
