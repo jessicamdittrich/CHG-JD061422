@@ -1,0 +1,2 @@
+// EXPORTING
+module.exports = generateSite;
