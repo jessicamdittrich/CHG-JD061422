@@ -1,6 +1,8 @@
-class Engineer {
+const Employee = require('./employee');
+
+class Engineer extends Employee {
     constructor(name, id, email, gitHub) {
-        // i need to pull name, id, email from employee file
+        super (name, id, email);
         this.gitHub = gitHub;
     }
 

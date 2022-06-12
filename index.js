@@ -4,33 +4,35 @@ const fs = require('fs');
 // need for jest
 
 // ADDED FILES
-const idkyet = require('./utils/employee');
-const idkyet2 = require('./utils/manager');
-const idkyet3 = require('./utils/engineer');
-const idkyet4 = require('./utils/intern');
+const Manager = require('./library/manager');
+const Engineer = require('./library/engineer');
+const Intern = require('./library/intern');
 const generateSite = require('./utils/generateSite');
+
+// GLOBAL ARRAY
+const team = [];
 
 // QUESTIONS WITH INQUIRER PACKAGE
 const addManager = [
     {
         type: 'input',
         message: 'Hello Manager, please give me your name:',
-        name: 'manager_name',
+        name: 'name',
     },
     {
         type: 'input',
         message: 'What is your id?:',
-        name: 'manager_id',
+        name: 'id',
     },
     {
         type: 'input',
         message: 'What is your email?',
-        name: 'manager_email',
+        name: 'email',
     },
     {
         type: 'input',
         message: 'What is your office number to reach you at?',
-        name: 'manager_number',
+        name: 'number',
     },
     {
         type: 'list',
@@ -44,22 +46,22 @@ const addEngineer = [
     {
         type: 'input',
         message: 'What is this engineers name?:',
-        name: 'engineer_name',
+        name: 'name',
     },
     {
         type: 'input',
         message: 'What is this engineers id?:',
-        name: 'engineer_id',
+        name: 'id',
     },
     {
         type: 'input',
         message: 'What is this engineers email?',
-        name: 'engineer_email',
+        name: 'email',
     },
     {
         type: 'input',
         message: 'What is this engineers GitHub username?',
-        name: 'engineer_gitHub',
+        name: 'gitHub',
     },
     {
         type: 'list',
@@ -73,22 +75,22 @@ const addIntern = [
     {
         type: 'input',
         message: 'What is this interns name?:',
-        name: 'intern_name',
+        name: 'name',
     },
     {
         type: 'input',
         message: 'What is this interns id?:',
-        name: 'intern_id',
+        name: 'id',
     },
     {
         type: 'input',
         message: 'What is this interns email?',
-        name: 'intern_email',
+        name: 'email',
     },
     {
         type: 'input',
         message: 'Where did this intern go to school?',
-        name: 'intern_school',
+        name: 'school',
     },
     {
         type: 'list',
@@ -99,32 +101,55 @@ const addIntern = [
 ];
 
 // TO CREATE HTML DOCUMENT
-function writeToFile(data) {
+function writeToFile() {
 
-    fs.writeFile('index.html', generateSite(data),
+    fs.writeFile('index.html', generateSite(team),
         (err) =>
             err ? console.log(err) : console.log('Success!')
     );
    
 }
 
+// ENGINEER FUNCTION
+function engineerQuestions() {
+    inquirer.prompt(addEngineer)
+        .then((data) => {
+            const newMember = new Engineer(data.name, data.id, data.email, data.gitHub);
+            team.push(newMember);
+            teamLoop(data);
+        });
+}
+
+// INTERN FUNCTION
+function internQuestions() {
+    inquirer.prompt(addIntern)
+        .then((data) => {
+            const newMember = new Intern(data.name, data.id, data.email, data.school);
+            team.push(newMember);
+            teamLoop(data);
+        });
+}
+
+// IF ELSE STATEMENT / FUNCTION
+function teamLoop(data) {
+    if(data.team_member === 'No that is all') {
+        writeToFile();
+    }
+    else if (data.team_member === 'Engineer') {
+        engineerQuestions();
+    }  
+    else if (data.team_member === 'Intern') {
+        internQuestions();
+    }
+}
+
 // FUNCTION TO INITIALIZE APPLICATION
 function init() {
     inquirer.prompt(addManager)
         .then((data) => {
-            if(data.team_member === 'No that is all'){
-                writeToFile(data); 
-            }
-            else if (data.team_member === 'Engineer') {
-                inquirer.prompt(addEngineer).then((res)=>{
-                    writeToFile(data)
-                });
-            }  
-            else if (data.team_member === 'Intern') {
-                inquirer.prompt(addIntern).then((res)=>{
-                    writeToFile(data)
-                });
-            }        
+            const newMember = new Manager(data.name, data.id, data.email, data.number);
+            team.push(newMember);
+            teamLoop(data);       
         });
 }
 

@@ -1,12 +1,14 @@
-class Intern {
+const Employee = require('./employee');
+
+class Intern extends Employee {
     constructor(name, id, email, school) {
-        // i need to pull name, id, email from employee file
+        super (name, id, email);
         this.school = school;
     }
 
     // GET SCHOOL FUNCTION -> TO BE GIVEN BY USER
     getSchool() {
-        return this.officeNumber;
+        return this.school;
     }
 
     // GET ROLE FUNCTION -> IS INTERN

@@ -1,6 +1,8 @@
-class Manager {
+const Employee = require('./employee');
+
+class Manager extends Employee{
     constructor(name, id, email, officeNumber) {
-        // i need to pull name, id, email from employee file
+        super (name, id, email);
         this.officeNumber = officeNumber;
     }
 
