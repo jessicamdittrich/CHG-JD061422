@@ -1,18 +1,17 @@
 // PROVIDED PACKAGES
 const inquirer = require('inquirer');
 const fs = require('fs');
-// need for jest
 
 // ADDED FILES
-const Manager = require('./library/manager');
-const Engineer = require('./library/engineer');
-const Intern = require('./library/intern');
+const Manager = require('./lib/manager');
+const Engineer = require('./lib/engineer');
+const Intern = require('./lib/intern');
 const generateSite = require('./utils/generateSite');
 
-// GLOBAL ARRAY
+// GLOBAL ARRAY FOR TEAM MEMBERS
 const team = [];
 
-// QUESTIONS WITH INQUIRER PACKAGE
+// QUESTIONS WITH INQUIRER PACKAGE - FOR MANAGER
 const addManager = [
     {
         type: 'input',
@@ -42,6 +41,7 @@ const addManager = [
     }, 
 ];
 
+// QUESTIONS WITH INQUIRER PACKAGE - FOR ENGINEER
 const addEngineer = [
     {
         type: 'input',
@@ -71,6 +71,7 @@ const addEngineer = [
     }, 
 ];
 
+// QUESTIONS WITH INQUIRER PACKAGE - FOR INTERN
 const addIntern = [
     {
         type: 'input',
@@ -103,14 +104,14 @@ const addIntern = [
 // TO CREATE HTML DOCUMENT
 function writeToFile() {
 
-    fs.writeFile('index.html', generateSite(team),
+    fs.writeFile('./dist/index.html', generateSite(team),
         (err) =>
             err ? console.log(err) : console.log('Success!')
     );
    
 }
 
-// ENGINEER FUNCTION
+// ENGINEER FUNCTION TO ASK QUESTIONS
 function engineerQuestions() {
     inquirer.prompt(addEngineer)
         .then((data) => {
@@ -120,7 +121,7 @@ function engineerQuestions() {
         });
 }
 
-// INTERN FUNCTION
+// INTERN FUNCTION TO ASK QUESTIONS
 function internQuestions() {
     inquirer.prompt(addIntern)
         .then((data) => {
@@ -130,7 +131,7 @@ function internQuestions() {
         });
 }
 
-// IF ELSE STATEMENT / FUNCTION
+// FUNCTION WITH IF/ELSE STATEMENT TO LOOP THROUGH ENGINEER AND INTERN QUESTIONS
 function teamLoop(data) {
     if(data.team_member === 'No that is all') {
         writeToFile();
@@ -143,7 +144,7 @@ function teamLoop(data) {
     }
 }
 
-// FUNCTION TO INITIALIZE APPLICATION
+// FUNCTION TO INITIALIZE APPLICATION AND START WITH MANAGER QUESTIONS
 function init() {
     inquirer.prompt(addManager)
         .then((data) => {

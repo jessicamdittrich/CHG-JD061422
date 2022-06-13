@@ -1,4 +1,4 @@
-const Engineer = require('../library/engineer');
+const Engineer = require('../lib/engineer');
 
 test('checking to see if we get the constructor value gitHub for Engineer', () => {
     const gitHub = 'jessicamdittrich';

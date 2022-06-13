@@ -1,4 +1,4 @@
-const Manager = require('../library/manager');
+const Manager = require('../lib/manager');
 
 test('checking to see if we get the constructor value officeNumber for Manager', () => {
     const officeNumber = '000-000-0000';

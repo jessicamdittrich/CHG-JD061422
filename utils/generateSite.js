@@ -1,4 +1,4 @@
-// FUNCTION TO GENERATE TEAM CARDS AND INPUT INTO MAIN FUNCTION (GENERATE SITE)
+// FUNCTION TO GENERATE MANAGER TEAM CARD
 function manager(data) {
     return `<div class="card">
                 <div class="name-title">
@@ -13,6 +13,7 @@ function manager(data) {
             </div>`
 }
 
+// FUNCTION TO GENERATE ENGINEER TEAM CARD(S)
 function newEngineer(data) {
     let engineerMember = [];
 
@@ -32,6 +33,7 @@ function newEngineer(data) {
     return engineerMember.join("");
 }
 
+// FUNCTION TO GENERATE INTERN TEAM CARD(S)
 function newIntern(data) {
     let internMember = [];
 
@@ -62,7 +64,7 @@ function generateSite(data) {
         
         <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
         <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./src/style.css">
+        <link rel="stylesheet" href="./style.css">
         <title>Your Team!</title>
     </head>
     <body>
